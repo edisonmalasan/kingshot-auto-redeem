@@ -1,0 +1,32 @@
+{
+  "api": {
+    "base_url": "https://kingshot.net/api"
+  },
+  "storage": {
+    "users_file": "data/users.json",
+    "players_file": "data/players.json",
+    "codes_file": "data/codes.json",
+    "logs_file": "data/logs.jsonl"
+  },
+  "limits": {
+    "max_players_per_user": 2,
+    "register_cooldown_seconds": 30,
+    "command_cooldown_seconds": 5
+  },
+  "admins": {
+    "user_ids": [
+      "691183268611096616"
+    ]
+  },
+  "auto_redeem": {
+    "enabled": true,
+    "poll_interval_seconds": 300,
+    "min_delay_seconds": 2.5,
+    "max_delay_seconds": 7.5,
+    "batch_pause_min_seconds": 8,
+    "batch_pause_max_seconds": 25,
+    "failure_cooldown_seconds": 120,
+    "max_retries": 3,
+    "retry_backoff_base": 2
+  }
+}

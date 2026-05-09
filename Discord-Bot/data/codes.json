@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "knownCodes": {
+    "Childrenday0505": {
+      "code": "Childrenday0505",
+      "firstSeenAt": "2026-05-08T13:24:49+00:00",
+      "lastSeenAt": "2026-05-09T22:27:08+00:00"
+    },
+    "KSPRAWNING": {
+      "code": "KSPRAWNING",
+      "firstSeenAt": "2026-05-08T13:24:49+00:00",
+      "lastSeenAt": "2026-05-09T22:27:08+00:00"
+    }
+  },
+  "lastFetchedAt": "2026-05-09T22:27:08+00:00"
+}
