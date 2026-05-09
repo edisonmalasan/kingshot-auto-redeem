@@ -1,0 +1,20 @@
+{
+  "polling_interval_seconds": 300,
+  "min_delay_seconds_gift_code": 2,
+  "max_delay_seconds_gift_code": 4,
+  "batch_pause_redeem_min": 4,
+  "batch_pause_redeem_max": 7,
+  "max_retries": 3,
+  "retry_backoff_base": 2,
+  "log_level": "INFO",
+  "api": {
+    "base_url": "https://kingshot.net/api",
+    "player_info_endpoint": "/player-info",
+    "gift_codes_endpoint": "/gift-codes",
+    "redeem_endpoint": "/gift-codes/redeem"
+  },
+  "storage": {
+    "players_file": "json/players.json",
+    "known_codes_file": "json/known_codes.json"
+  }
+}
