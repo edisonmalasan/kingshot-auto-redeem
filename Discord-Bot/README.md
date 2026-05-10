@@ -95,6 +95,14 @@ How to Run:
 python bot.py
 ```
 
+For development, use the auto-restart watcher:
+
+```bash
+python dev.py
+```
+
+`dev.py` restarts `bot.py` whenever a `.py`, `.json`, or `.env` file changes, so you do not need to press Ctrl+C and start it again after edits.
+
 ## Storage Files
 
 The bot stores data in `data/`:
