@@ -89,19 +89,13 @@ PUBLIC_KEY=your-public-key
 
 `APP_ID` is used as the bot application ID. `DISCORD_TOKEN` is required to run the gateway bot. `PUBLIC_KEY` is kept in the env file for Discord app completeness, but this `discord.py` bot does not need it unless you later switch to a webhook/interactions server.
 
-How to Run:
+How to Run with Hot Reload:
 
 ```bash
 python main.py
 ```
 
-For development, use the auto-restart watcher:
-
-```bash
-python dev.py
-```
-
-`dev.py` restarts `bot.py` whenever a `.py`, `.json`, or `.env` file changes, so you do not need to press Ctrl+C and start it again after edits.
+`main.py` starts the bot and automatically restarts it whenever a `.py`, `.json`, or `.env` file changes. Files in `data/` are ignored so normal bot storage updates do not trigger restarts.
 
 ## Storage Files
 

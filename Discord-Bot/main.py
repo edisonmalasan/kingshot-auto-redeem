@@ -5,10 +5,10 @@ import sys
 import time
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parent
 WATCH_EXTENSIONS = {".py", ".json", ".env"}
-IGNORE_DIRS = {".venv", "__pycache__"}
+IGNORE_DIRS = {".venv", "__pycache__", "data"}
+BOT_ARGS = ["--bot"]
 
 
 def iter_watched_files() -> list[Path]:
@@ -28,7 +28,12 @@ def snapshot() -> dict[Path, float]:
 
 
 def start_bot() -> subprocess.Popen:
-    return subprocess.Popen([sys.executable, "bot.py"], cwd=ROOT)
+    creationflags = subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0
+    return subprocess.Popen(
+        [sys.executable, "main.py", *BOT_ARGS],
+        cwd=ROOT,
+        creationflags=creationflags,
+    )
 
 
 def stop_bot(process: subprocess.Popen) -> None:
@@ -57,7 +62,7 @@ def main() -> None:
             time.sleep(1)
 
             if process.poll() is not None:
-                print("bot.py stopped. Restarting in 2s...")
+                print("Bot stopped. Restarting in 2s...")
                 time.sleep(2)
                 process = start_bot()
                 before = snapshot()
@@ -65,7 +70,7 @@ def main() -> None:
 
             current = snapshot()
             if current != before:
-                print("File change detected. Restarting bot.py...")
+                print("File change detected. Restarting bot...")
                 stop_bot(process)
                 process = start_bot()
                 before = snapshot()
@@ -74,5 +79,20 @@ def main() -> None:
         stop_bot(process)
 
 
+def run_bot() -> None:
+    from dotenv import load_dotenv
+
+    from bot import bot
+
+    load_dotenv(ROOT / ".env")
+    token = os.getenv("DISCORD_TOKEN")
+    if not token:
+        raise RuntimeError("DISCORD_TOKEN is missing. Copy .env.example to .env and set your Discord bot token.")
+    bot.run(token)
+
+
 if __name__ == "__main__":
-    main()
+    if BOT_ARGS[0] in sys.argv[1:]:
+        run_bot()
+    else:
+        main()
