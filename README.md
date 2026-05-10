@@ -76,16 +76,6 @@ A Discord slash-command bot for managing Kingshot player registrations and redee
 - `/status player_id:<id>` shows private redemption status for an owned player in expanded card mode.
 - Background polling checks Kingshot gift codes and redeems new codes through a single queue.
 
-### Player Cards
-
-Cards use the Kingshot `profilePhoto` as the embed thumbnail and display:
-
-- player name with `#playerId`
-- kingdom
-- town center / TG level
-- TG level text when `levelRendered` contains `TG1` through `TG8`
-- auto redeem and redemption history in expanded mode
-
 ### Admin Commands
 
 Admin user IDs are configured in `config.json`:
