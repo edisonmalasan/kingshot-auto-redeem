@@ -35,6 +35,18 @@ Admin user IDs are configured in `config.json`:
 
 `/listallplayers` is blocked for everyone else at runtime. Discord may still show globally synced slash commands in the command picker unless you also restrict the command in your server's Discord Integration command permissions.
 
+## Auto-Delete Text Channel
+
+Normal user messages are automatically deleted in configured channels:
+
+```json
+"moderation": {
+  "delete_normal_messages_channel_ids": ["1502441858347827214"]
+}
+```
+
+Slash commands still work normally because they are Discord interactions, not normal text messages. The bot needs `Manage Messages` permission in the configured channel.
+
 ## Setup
 
 Follow these steps to set up and run the application locally:

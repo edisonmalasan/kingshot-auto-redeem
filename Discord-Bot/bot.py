@@ -40,14 +40,24 @@ def _optional_int_env(name: str) -> int | None:
     return int(value) if value.isdigit() else None
 
 
+def _config_id_set(section: str, key: str) -> set[int]:
+    ids = CONFIG.get(section, {}).get(key, [])
+    return {int(value) for value in ids if str(value).isdigit()}
+
+
 class KingshotBot(discord.Client):
     def __init__(self) -> None:
         intents = discord.Intents.default()
+        intents.guild_messages = True
         super().__init__(
             intents=intents,
             application_id=_optional_int_env("APP_ID"),
         )
         self.tree = app_commands.CommandTree(self)
+        self.delete_message_channel_ids = _config_id_set(
+            "moderation",
+            "delete_normal_messages_channel_ids",
+        )
 
         self.repository = JsonRepository(ROOT, CONFIG["storage"])
         self.api = KingshotApi(
@@ -76,6 +86,31 @@ class KingshotBot(discord.Client):
     async def auto_redeem_loop(self) -> None:
         await self.wait_until_ready()
         await self.redeemer.run_once()
+
+    async def on_message(self, message: discord.Message) -> None:
+        if message.author.bot:
+            return
+        if message.channel.id not in self.delete_message_channel_ids:
+            return
+        if message.type is not discord.MessageType.default:
+            return
+
+        try:
+            await message.delete()
+        except discord.NotFound:
+            return
+        except discord.Forbidden:
+            logger.warning(
+                "Missing Manage Messages permission in channel %s; cannot auto-delete messages.",
+                message.channel.id,
+            )
+        except discord.HTTPException as exc:
+            logger.warning(
+                "Failed to auto-delete message %s in channel %s: %s",
+                message.id,
+                message.channel.id,
+                exc,
+            )
 
 
 bot = KingshotBot()

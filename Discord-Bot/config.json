@@ -18,6 +18,11 @@
       "691183268611096616"
     ]
   },
+  "moderation": {
+    "delete_normal_messages_channel_ids": [
+      "1502441858347827214"
+    ]
+  },
   "auto_redeem": {
     "enabled": true,
     "poll_interval_seconds": 300,
