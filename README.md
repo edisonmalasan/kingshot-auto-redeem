@@ -132,7 +132,7 @@ PUBLIC_KEY=your-public-key
 ### How to Run:
 
 ```bash
-python bot.py
+python main.py
 ```
 
 ### Storage Files

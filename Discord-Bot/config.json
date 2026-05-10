@@ -10,7 +10,7 @@
   },
   "limits": {
     "max_players_per_user": 2,
-    "register_cooldown_seconds": 30,
+    "register_cooldown_seconds": 5,
     "command_cooldown_seconds": 5
   },
   "admins": {
@@ -25,7 +25,7 @@
   },
   "auto_redeem": {
     "enabled": true,
-    "poll_interval_seconds": 300,
+    "poll_interval_seconds": 3600,
     "min_delay_seconds": 2.5,
     "max_delay_seconds": 7.5,
     "batch_pause_min_seconds": 8,
