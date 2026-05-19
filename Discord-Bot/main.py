@@ -88,7 +88,7 @@ def run_bot() -> None:
     token = os.getenv("DISCORD_TOKEN")
     if not token:
         raise RuntimeError("DISCORD_TOKEN is missing. Copy .env.example to .env and set your Discord bot token.")
-    bot.run(token)
+    bot.run(token, log_handler=None)
 
 
 if __name__ == "__main__":

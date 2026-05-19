@@ -4,13 +4,42 @@
     "Childrenday0505": {
       "code": "Childrenday0505",
       "firstSeenAt": "2026-05-10T00:08:24+00:00",
-      "lastSeenAt": "2026-05-10T00:31:58+00:00"
+      "lastSeenAt": "2026-05-15T11:30:38+00:00",
+      "expiredAt": "2026-05-13T15:44:54+00:00",
+      "expiredMessage": "This gift code has expired."
     },
     "KSPRAWNING": {
       "code": "KSPRAWNING",
       "firstSeenAt": "2026-05-10T00:08:24+00:00",
-      "lastSeenAt": "2026-05-10T00:31:58+00:00"
+      "lastSeenAt": "2026-05-19T17:05:14+00:00"
+    },
+    "BESTMOM2026": {
+      "code": "BESTMOM2026",
+      "firstSeenAt": "2026-05-10T12:35:34+00:00",
+      "lastSeenAt": "2026-05-15T11:30:38+00:00"
+    },
+    "LOVEFAMILY": {
+      "code": "LOVEFAMILY",
+      "firstSeenAt": "2026-05-15T17:05:18+00:00",
+      "lastSeenAt": "2026-05-19T17:05:14+00:00"
+    },
+    "OFFICIALSTORE516": {
+      "code": "OFFICIALSTORE516",
+      "firstSeenAt": "2026-05-16T12:05:14+00:00",
+      "lastSeenAt": "2026-05-19T17:05:14+00:00"
+    },
+    "KS0518": {
+      "code": "KS0518",
+      "firstSeenAt": "2026-05-18T07:05:14+00:00",
+      "lastSeenAt": "2026-05-19T17:05:14+00:00"
+    },
+    "847EadKex": {
+      "code": "847EadKex",
+      "firstSeenAt": "2026-05-19T08:05:14+00:00",
+      "lastSeenAt": "2026-05-19T17:05:14+00:00",
+      "maxUsesReachedAt": "2026-05-19T17:33:57+00:00",
+      "maxUsesReachedMessage": "This gift code has reached its maximum uses."
     }
   },
-  "lastFetchedAt": "2026-05-10T00:31:58+00:00"
+  "lastFetchedAt": "2026-05-19T17:05:14+00:00"
 }

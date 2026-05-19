@@ -152,6 +152,46 @@ class JsonRepository:
             self._save_json(self.codes_path, data)
             return new_codes
 
+    async def list_expired_codes(self) -> set[str]:
+        async with self._lock:
+            data = self._load_json(self.codes_path, {"schemaVersion": 1, "knownCodes": {}, "lastFetchedAt": None})
+            known_codes = data.get("knownCodes", {})
+            return {
+                str(code)
+                for code, record in known_codes.items()
+                if isinstance(record, dict) and record.get("expiredAt")
+            }
+
+    async def list_unredeemable_codes(self) -> set[str]:
+        async with self._lock:
+            data = self._load_json(self.codes_path, {"schemaVersion": 1, "knownCodes": {}, "lastFetchedAt": None})
+            known_codes = data.get("knownCodes", {})
+            return {
+                str(code)
+                for code, record in known_codes.items()
+                if isinstance(record, dict) and (record.get("expiredAt") or record.get("maxUsesReachedAt"))
+            }
+
+    async def mark_code_expired(self, code: str, message: str) -> None:
+        async with self._lock:
+            data = self._load_json(self.codes_path, {"schemaVersion": 1, "knownCodes": {}, "lastFetchedAt": None})
+            known_codes = data.setdefault("knownCodes", {})
+            now = utc_now_iso()
+            record = known_codes.setdefault(str(code), {"code": str(code), "firstSeenAt": now, "lastSeenAt": now})
+            record["expiredAt"] = now
+            record["expiredMessage"] = message
+            self._save_json(self.codes_path, data)
+
+    async def mark_code_max_uses_reached(self, code: str, message: str) -> None:
+        async with self._lock:
+            data = self._load_json(self.codes_path, {"schemaVersion": 1, "knownCodes": {}, "lastFetchedAt": None})
+            known_codes = data.setdefault("knownCodes", {})
+            now = utc_now_iso()
+            record = known_codes.setdefault(str(code), {"code": str(code), "firstSeenAt": now, "lastSeenAt": now})
+            record["maxUsesReachedAt"] = now
+            record["maxUsesReachedMessage"] = message
+            self._save_json(self.codes_path, data)
+
     async def mark_redeemed(self, player_id: str, code: str, result: dict[str, Any]) -> None:
         async with self._lock:
             players = self._load_json(self.players_path, {"schemaVersion": 1, "players": {}})
@@ -168,6 +208,7 @@ class JsonRepository:
                         "message": result.get("message", ""),
                     }
                 )
+            player.setdefault("failedCodes", {}).pop(code, None)
             player["updatedAt"] = utc_now_iso()
             self._save_json(self.players_path, players)
 

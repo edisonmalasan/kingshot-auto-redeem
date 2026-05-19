@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 from pathlib import Path
@@ -86,6 +87,33 @@ class KingshotBot(discord.Client):
         await self.wait_until_ready()
         await self.redeemer.run_once()
 
+    def wake_auto_redeem(self, reason: str) -> None:
+        if not CONFIG["auto_redeem"].get("enabled", True):
+            return
+
+        logger.info("Auto redeem wake requested: %s", reason)
+        task = asyncio.create_task(self.redeemer.run_once())
+        task.add_done_callback(self._log_auto_redeem_wake_result)
+
+    @staticmethod
+    def _log_auto_redeem_wake_result(task: asyncio.Task[dict[str, int]]) -> None:
+        try:
+            stats = task.result()
+        except Exception:
+            logger.exception("Auto redeem wake failed")
+            return
+
+        logger.info(
+            "Auto redeem wake finished: success=%s already=%s rate_limited=%s expired=%s max_uses=%s failed=%s skipped=%s",
+            stats.get("success", 0),
+            stats.get("already", 0),
+            stats.get("rate_limited", 0),
+            stats.get("expired", 0),
+            stats.get("max_uses", 0),
+            stats.get("failed", 0),
+            stats.get("skipped", 0),
+        )
+
     async def on_message(self, message: discord.Message) -> None:
         if message.author.bot:
             return
@@ -164,6 +192,7 @@ async def register(interaction: discord.Interaction, player_id: str) -> None:
         playerId=record["playerId"],
         playerName=record["playerName"],
     )
+    bot.wake_auto_redeem(f"player registered: {record['playerId']}")
 
     await interaction.followup.send(
         content="Registered player account. Auto redeem is enabled.",
@@ -293,4 +322,4 @@ if __name__ == "__main__":
     token = os.getenv("DISCORD_TOKEN")
     if not token:
         raise RuntimeError("DISCORD_TOKEN is missing. Copy .env.example to .env and set your Discord bot token.")
-    bot.run(token)
+    bot.run(token, log_handler=None)

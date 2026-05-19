@@ -25,12 +25,15 @@
   },
   "auto_redeem": {
     "enabled": true,
-    "poll_interval_seconds": 3600,
-    "min_delay_seconds": 2.5,
-    "max_delay_seconds": 7.5,
-    "batch_pause_min_seconds": 8,
-    "batch_pause_max_seconds": 25,
-    "failure_cooldown_seconds": 120,
+    "poll_interval_seconds": 3600, 
+    "min_delay_seconds": 20,
+    "max_delay_seconds": 45,
+    "batch_pause_min_seconds": 60,
+    "batch_pause_max_seconds": 120,
+    "failure_cooldown_seconds": 180,
+    "rate_limit_cooldown_seconds": 600,
+    "same_player_cooldown_seconds": 300,
+    "max_rate_limit_retries_per_cycle": 3,
     "max_retries": 3,
     "retry_backoff_base": 2
   }

@@ -47,7 +47,7 @@ This bot automatically redeems new Kingshot gift codes for your account using on
 
 ## How to use the bot
 
-* `/register player_id:<your_player_id>` — Link your Kingshot account to Discord. This is required before using the bot.
+* `/register player_id:<your_player_id>` — register your Kingshot Player ID
 * `/list` — View all accounts you have registered.
 * `/status player_id:<your_player_id>` — Check recently redeemed gift codes for your account.
 * `/stopautoredeem player_id:<your_player_id>` — Temporarily pause automatic code redemption.
@@ -78,7 +78,7 @@ Ce bot réclame automatiquement les nouveaux codes cadeaux Kingshot pour votre c
 
 ## Comment utiliser le bot
 
-* `/register player_id:<votre_id_joueur>` — Associez votre compte Kingshot à Discord. Cette étape est obligatoire avant d'utiliser le bot.
+* `/register player_id:<votre_id_joueur>` — Enregistrez votre identifiant de joueur Kingshot
 * `/list` — Affiche tous les comptes que vous avez enregistrés.
 * `/status player_id:<votre_id_joueur>` — Vérifie les derniers codes cadeaux réclamés pour votre compte.
 * `/stopautoredeem player_id:<votre_id_joueur>` — Met temporairement en pause la réclamation automatique des codes.
