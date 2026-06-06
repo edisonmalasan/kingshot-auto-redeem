@@ -56,6 +56,7 @@ Follow these steps to set up and run the application locally:
    ```bash
    git clone https://github.com/edisonmalasan/kingshot-auto-redeem
    cd kingshot-auto-redeem
+   cd Discord-Bot
    ```
 
 2. **Create a virtual environment**
